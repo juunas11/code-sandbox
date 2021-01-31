@@ -1,0 +1,18 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "TenantId": "",
+    "UseLocalUserAuthentication": true,
+    "SubscriptionId": "",
+    "ResourceGroup": "code-sandbox",
+    "Location": "westeurope",
+    "ImageName": "someregistry.azurecr.io/csharp-sandbox:latest",
+    "ImageRegistryServer": "someregistry.azurecr.io",
+    "ImageRegistryUsername": "",
+    "ImageRegistryPassword": "",
+    "StorageConnectionString": "",
+    "StorageContainer": "code"
+  }
+}
