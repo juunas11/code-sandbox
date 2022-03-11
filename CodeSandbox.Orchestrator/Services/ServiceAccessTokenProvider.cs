@@ -9,7 +9,6 @@ namespace CodeSandbox.Orchestrator.Services
     public class ServiceAccessTokenProvider
     {
         private readonly TokenCredential _tokenCredential;
-        private readonly bool _useLocalUserAuthentication;
         private AccessToken _cachedToken;
 
         public ServiceAccessTokenProvider(IConfiguration configuration)
@@ -19,10 +18,9 @@ namespace CodeSandbox.Orchestrator.Services
             {
                 SharedTokenCacheTenantId = tenantId,
                 VisualStudioCodeTenantId = tenantId,
-                VisualStudioTenantId = tenantId
+                VisualStudioTenantId = tenantId,
             };
             _tokenCredential = new DefaultAzureCredential(options);
-            _useLocalUserAuthentication = bool.Parse(configuration["UseLocalUserAuthentication"]);
         }
 
         public async Task<string> GetAzureManagementApiAccessTokenAsync()
@@ -35,9 +33,7 @@ namespace CodeSandbox.Orchestrator.Services
                 return _cachedToken.Token;
             }
 
-            var scope = _useLocalUserAuthentication
-                ? "https://management.core.windows.net/user_impersonation"
-                : "https://management.core.windows.net/.default";
+            var scope = "https://management.core.windows.net/.default";
             var accessToken = await _tokenCredential.GetTokenAsync(
                 new TokenRequestContext(new[] { scope }), default);
             _cachedToken = accessToken;
